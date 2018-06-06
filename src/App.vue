@@ -1,28 +1,43 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+ <div>
+   <app-header v-bind:title="title" v-on:changeTitle="updateTitle($event)"></app-header>
+   <app-ninjas v-bind:ninjas="ninjas"></app-ninjas>
+   <app-footer v-bind:title="title"></app-footer>
+   
+ </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header.vue'
+
+import Ninjas from './components/Ninjas.vue'
+import Footer from './components/Footer.vue'
 
 export default {
-  name: 'app',
   components: {
-    HelloWorld
+    'app-header': Header,
+    'app-footer': Footer,
+    'app-ninjas': Ninjas
+  },
+  data() {
+    return {
+      ninjas: [
+        {name: 'Andi', speciality: 'Vue Components', show: false},
+        {name: 'Crystal', speciality: 'HTML Wizards', show: false},
+        {name: 'Hitoshi', speciality: 'Click EVENTS', show: false}
+      ],
+      title: "Vue Ninjas"
+    }
+  },
+  methods: {
+    updateTitle: function(updateTitle){
+      this.title = updateTitle;
+    }
   }
+
 }
 </script>
 
+<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
